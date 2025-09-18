@@ -4,7 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "VSource Educational Consultants Pvt Ltd",
+  title: "VSource Admissions Consultants Pvt Ltd",
   description: "Prefix Your Name With Doctor — MBBS Abroad Guidance & Admissions",
 };
 

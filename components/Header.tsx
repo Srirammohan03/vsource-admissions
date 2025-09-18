@@ -102,30 +102,25 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 w-full z-40 transition-all duration-300",
+        "fixed top-0 left-0 w-full z-40 transition-all duration-300 py-2",
         isScrolled ? "bg-white shadow-md" : "bg-transparent"
       )}
     >
       {/* top row */}
-      <div className="container h-20 flex items-center justify-between gap-4">
+      <div className="w-full max-w-[1400px] mx-auto px-6  h-20 flex items-center justify-between gap-4">
         {/* Logos */}
-        <Link href="/" className="relative z-20 flex items-center gap-3">
-          <Image
-            src="/assets/images/fintech-logo.png"
-            alt="VSource Logo"
-            width={120}
-            height={48}
-            className="h-12 w-auto object-contain"
-            priority
+         <Link href="/" className="flex items-center gap-2 relative z-20">
+          <img
+            alt="Vsource Logo"
+            className="h-16 md:h-20 w-auto object-contain rounded-xl"
+            src="/images/vsourcess.png"
           />
-          <Image
-            src="/assets/images/20-years-logo-01.png"
-            alt="20 Years"
-            width={120}
-            height={48}
-            className="h-12 w-auto object-contain"
-            priority
+            <img
+            alt="Vsource Logo"
+            className="h-16 md:h-20 w-auto object-contain rounded-xl"
+            src="/images/20 years logo-01.png"
           />
+
         </Link>
 
         {/* Desktop nav */}
@@ -152,49 +147,51 @@ export function Header() {
               MBBS-ABROAD <ChevronDown className="h-4 w-4" />
             </button>
 
-            {/* Dropdown panel */}
-            <div
-              className={cn(
-                "absolute left-0 top-full mt-3 w-[720px] max-w-[90vw] grid grid-cols-[210px_1fr] rounded-2xl border border-gray-100 bg-white shadow-lg transition-all duration-200",
-                openDropdown ? "opacity-100 visible" : "opacity-0 invisible"
-              )}
-            >
-              {/* Left tabs */}
-              <div className="p-2">
-                {CATEGORIES.map((c) => (
-                  <button
-                    key={c.key}
-                    onMouseEnter={() => setTab(c.key)}
-                    onFocus={() => setTab(c.key)}
-                    onClick={() => setTab(c.key)}
-                    className={cn(
-                      "w-full text-left px-3 py-2 rounded-md text-sm font-semibold transition-colors",
-                      tab === c.key
-                        ? "text-brand-blue bg-brand-gray/40"
-                        : "text-gray-700 hover:bg-gray-100 hover:text-brand-red"
-                    )}
-                  >
-                    {c.label}
-                  </button>
-                ))}
-              </div>
+            {/* Dropdown panel (centered & always above header) */}
+<div
+  className={cn(
+    "fixed left-1/2 mt-3  w-[720px] max-w-[95vw] grid grid-cols-[220px_1fr] rounded-2xl border border-gray-100 bg-white shadow-lg transition-all duration-200 z-50",
+    openDropdown ? "opacity-100 visible" : "opacity-0 invisible"
+  )}
+  style={{ top: "5rem" }} // match your header height (h-20 = 80px = 5rem)
+>
+  {/* Left tabs with flags */}
+  <div className="p-3 space-y-2">
+    {CATEGORIES.map((c) => (
+      <button
+        key={c.key}
+        onMouseEnter={() => setTab(c.key)}
+        onFocus={() => setTab(c.key)}
+        onClick={() => setTab(c.key)}
+        className={cn(
+          "w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-semibold transition-colors",
+          tab === c.key
+            ? "text-brand-blue bg-brand-gray/40"
+            : "text-gray-700 hover:bg-gray-100 hover:text-brand-red"
+        )}
+      >
+        {c.label}
+      </button>
+    ))}
+  </div>
 
-              {/* Right list */}
-              <div className="p-2">
-                <ul className="divide-y">
-                  {currentCategory.items.map((u) => (
-                    <li key={u.href}>
-                      <Link
-                        href={u.href}
-                        className="block px-3 py-2 hover:bg-gray-100 hover:text-brand-red rounded-md text-gray-900 transition-colors"
-                      >
-                        {u.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+  {/* Right list */}
+  <div className="p-3">
+    <ul className="divide-y">
+      {currentCategory.items.map((u) => (
+        <li key={u.href}>
+          <Link
+            href={u.href}
+            className="block px-3 py-2 hover:bg-gray-100 hover:text-brand-red rounded-md text-gray-900 transition-colors text-sm md:text-base"
+          >
+            {u.name}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>
+
           </div>
 
           <Link href="/360-view" className={linkCls(isActive("/360-view"))}>
@@ -236,7 +233,7 @@ export function Header() {
             <div className="container h-20 flex items-center justify-between">
               <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-3">
                 <Image
-                  src="/assets/images/fintech-logo.png"
+                  src="/images/vsourcess.png"
                   alt="VSource Logo"
                   width={120}
                   height={48}
@@ -244,7 +241,7 @@ export function Header() {
                   priority
                 />
                 <Image
-                  src="/assets/images/20-years-logo-01.png"
+                  src="/images/20 years logo-01.png"
                   alt="20 Years"
                   width={120}
                   height={48}

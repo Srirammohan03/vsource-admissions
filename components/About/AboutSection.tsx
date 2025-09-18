@@ -1,0 +1,387 @@
+import React, { useState, useEffect, useRef } from "react";
+
+const AboutSection: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  const stats = [
+    {
+      id: 1,
+      value: 100000,
+      suffix: "+",
+      label: "Students Happier",
+      icon: "https://cdn-icons-gif.flaticon.com/6454/6454106.gif",
+    },
+    {
+      id: 2,
+      value: 20,
+      suffix: "+",
+      label: "Years of\nExperience",
+      icon: "https://cdn-icons-gif.flaticon.com/15370/15370761.gif",
+    },
+    {
+      id: 3,
+      value: 25,
+      suffix: "+",
+      label: "Banking & NBFC Ties",
+      icon: "/assets/images/diversity.gif",
+    },
+     {
+      id: 4,
+      value: 500,
+      suffix: "+ cr",
+      label: "Disbursed Every Year",
+      icon: "/assets/images/money-bag.gif",
+    },
+  ];
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+    if (sectionRef.current) obs.observe(sectionRef.current);
+    return () => obs.disconnect();
+  }, []);
+
+  const useCounter = (end: number, start = 0, duration = 2000) => {
+    const [count, setCount] = useState(start);
+    useEffect(() => {
+      if (!isVisible) return;
+      let startTime: number | null = null;
+      const step = (t: number) => {
+        if (startTime === null) startTime = t;
+        const p = Math.min((t - startTime) / duration, 1);
+        setCount(Math.floor(p * (end - start) + start));
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }, [end, start, duration, isVisible]);
+    return count;
+  };
+
+  return (
+    <section className="about-section" ref={sectionRef}>
+      <div className="w-full max-w-[1400px] mx-auto px-4">
+        <div className="top-section">
+          <div className="left">
+            {/* Heading */}
+            <h2
+              data-aos="fade-right"
+              data-aos-anchor-placement="center-bottom"
+              data-aos-duration="1000"
+              data-aos-delay="0"
+              className="text-[#1e73be]"
+            >
+              About Vsource Fintech
+            </h2>
+
+            {/* Section 1 */}
+            <div
+              className="flex items-start  pt-3"
+              data-aos="fade-right"
+              data-aos-anchor-placement="center-bottom"
+              data-aos-duration="1000"
+              data-aos-delay="200"
+            >
+              <img
+                src="/assets/images/Graduation-Hat.gif"
+                alt="Graduation Hat"
+                className="w-10 h-10 mt-1 flex-shrink-0"
+              />
+              <span className="font-bold text-lg md:leading-10">
+                Study Abroad Education Loans Made Easy
+              </span>
+            </div>
+            <p
+              className="para pb-1"
+              data-aos="fade-right"
+              data-aos-anchor-placement="center-bottom"
+              data-aos-duration="1000"
+              data-aos-delay="200"
+            >
+              Are you planning to study abroad but worried about finances? We are South India's most trusted name in education loan guidance, helping students secure study abroad loans with ease, speed, and confidence.
+            </p>
+            {/* Section 2 */}
+            <div
+              className="flex items-start pt-1"
+              data-aos="fade-right"
+              data-aos-anchor-placement="center-bottom"
+              data-aos-duration="1000"
+              data-aos-delay="200"
+            >
+              <img
+                src="/assets/images/globe.gif"
+                alt="Globe"
+                className="w-8 h-8 mt-1 flex-shrink-0"
+              />
+              <span className="font-bold text-lg  md:leading-10">
+                100% Assistance for Education Loans to Study Abroad
+              </span>
+            </div>
+            <p
+              className="para pb-1"
+              data-aos="fade-right"
+              data-aos-anchor-placement="center-bottom"
+              data-aos-duration="1000"
+              data-aos-delay="200"
+            >
+              We offer end-to-end support for students looking to finance their higher education overseas. From choosing the right loan provider to assisting with documentation, approval, and disbursement — we make the entire education loan process simple and stress-free.
+            </p>
+
+            {/* Section 3 */}
+            <div
+              className="flex items-start pt-1"
+              data-aos="fade-right"
+              data-aos-anchor-placement="center-bottom"
+              data-aos-duration="1000"
+              data-aos-delay="200"
+            >
+              <img
+                src="/assets/images/Briefcase.gif"
+                alt="Briefcase"
+                className="w-10 h-10 mt-1 flex-shrink-0"
+              />
+              <span className="font-bold text-lg  md:leading-10">
+                Trusted Education Loan Experts for Top Global Destinations
+              </span>
+            </div>
+            <p
+              className="para"
+              data-aos="fade-right"
+              data-aos-anchor-placement="center-bottom"
+              data-aos-duration="1000"
+              data-aos-delay="200"
+            >
+              We specialize in securing study abroad loans for students heading to: UK, USA, Ireland, France, and Canada.
+            </p>
+
+            {/* Final Paragraph */}
+            <p
+              className="para"
+              data-aos="fade-right"
+              data-aos-anchor-placement="center-bottom"
+              data-aos-duration="1000"
+              data-aos-delay="200"
+            >
+              <span className="font-bold">100% Educational Loan Guidance </span>
+              provided to support your academic journey.
+            </p>
+          </div>
+
+
+
+          <div className="flex flex-col gap-4 sm:hidden ">
+            {stats.map((stat, i) => {
+              const count = useCounter(stat.value);
+              return (
+                <div
+                  key={stat.id}
+                  className="stat-box"
+                  data-aos="fade-up"
+                  data-aos-delay={i * 200}
+                  data-aos-duration="1000"
+                  data-aos-anchor-placement="center-bottom"
+                >
+                  <div className="left-box">
+                    <img src={stat.icon} alt="" className="icon" />
+                    <div className="count text-[#1e73be]">
+                      {count.toLocaleString("en-US")}
+                      {stat.suffix}
+                    </div>
+                  </div>
+                  <div className="label">{stat.label}</div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div
+            className="right"
+            data-aos="flip-left"
+            data-aos-easing="ease-out-cubic"
+            data-aos-duration="2000"
+            data-aos-anchor-placement="center-bottom"
+          >
+            <img
+              src="https://vsourcevarsity.com/assets/images/founder.webp"
+              alt="Founder"
+              className="founder-img"
+            />
+            <p className="quote">
+              “Redefining Education for Tomorrow’s Innovators”
+            </p>
+          </div>
+        </div>
+
+        <div className="bottom-section">
+          {stats.map((stat, i) => {
+            const count = useCounter(stat.value);
+            return (
+              <div
+                key={stat.id}
+                className="stat-box"
+                data-aos="fade-up"
+                data-aos-delay={i * 200}
+                data-aos-duration="1000"
+                data-aos-anchor-placement="center-bottom"
+              >
+                <div className="left-box">
+                  <img src={stat.icon} alt="" className="icon" />
+                  <div className="count text-[#1e73be]">
+                    {count.toLocaleString("en-US")}
+                    {stat.suffix}
+                  </div>
+                </div>
+                <div className="label">{stat.label}</div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <style>{`
+        .about-section {
+          padding: clamp(32px, 4vw, 50px) 16px;
+          background: #fff;
+          font-family: 'Barlow', sans-serif;
+          color: #111;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        .top-section {
+          display: grid;
+          grid-template-columns: 1fr;   
+          gap: 24px;
+        }
+
+        @media (min-width: 768px) {
+          .top-section {
+            grid-template-columns: 65% 30%; 
+            gap: 32px;
+            align-items: start;
+          }
+        }
+
+        .left { min-width: 0; }
+        .right { display: flex; flex-direction: column; align-items: center; }
+        h2 { font-size: clamp(30px, 3.6vw, 32px); font-weight: 700; margin: 0; }
+        .desc { font-size: clamp(20px, 2.5vw, 25px); margin: 8px 0 0; line-height: 1.6; }
+        .para { font-size: clamp(15px, 2.3vw, 15px); margin: 8px 0 0; }
+
+        .features { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 10px; }
+        .features li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; font-size: clamp(15px, 2.3vw, 15px); }
+        .features li img { width: 22px; height: 22px; margin-top: 2px; }
+
+        .founder-img { width: 100%; max-width: 450px; border-radius: 10px; border: 1px solid #e5e7eb; }
+        .quote { font-style: italic; margin-top: 10px; text-align: center; font-size: 15px; }
+
+        /* Stats grid */
+        .bottom-section {
+          margin-top: clamp(28px, 6vw, 50px);
+          display: grid;
+          grid-template-columns: 1fr; /* mobile */
+          gap: 20px;
+          // width: 80%;
+          margin: clamp(28px, 6vw, 50px) auto 0;
+        }
+        @media (min-width: 640px) {
+          .bottom-section {
+            grid-template-columns: repeat(2, 1fr); /* tablet */
+          }
+        }
+        @media (min-width: 1024px) {
+          .bottom-section {
+            grid-template-columns: repeat(4, 1fr); /* desktop */
+          }
+        }
+
+        .stat-box {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border: 1px solid #0069E9;
+          border-radius: 8px;
+          padding: 13px;
+          min-height: 80px;
+          background: #fff;
+          box-sizing: border-box;
+        }
+
+        .left-box {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .icon {
+          width: 40px;
+          height: 40px;
+          flex-shrink: 0;
+          object-fit: contain;
+        }
+
+        .bottom-section .stat-box:first-child .icon {
+          width: 52px;
+          height: 52px;
+        }
+
+        .count {
+          font-size: clamp(20px, 4.5vw, 30px);
+          font-weight: 800;
+          margin: 0;
+          white-space: nowrap;
+        }
+
+        .label {
+          font-size: clamp(13px, 3.5vw, 15px);
+          font-weight: 600;
+          color: #111;
+          line-height: 1.3;
+          text-align: right;
+          margin-left: 10px;
+          width: 34%;
+        }
+
+        /* Ultra-small phones */
+        @media (max-width: 380px) {
+          .stat-box { gap: 8px; padding: 10px; }
+          .count { font-size: 18px; }
+          .label { font-size: 12px; }
+        }
+        @media (max-width: 540px) {
+          .left-box {
+              width: 50%;
+              justify-content: space-between;
+            }
+          .stat-box:first-child .left-box {
+              width: 60%;
+              justify-content: space-between;
+            }
+          }
+            
+        @media (max-width: 640px) {
+          .bottom-section{
+            display:none;
+          }
+        }
+
+
+        /* Accessibility: disable motion */
+        @media (prefers-reduced-motion: reduce) {
+          .about-section * {
+            animation: none !important;
+            transition: none !important;
+          }
+        }
+      `}</style>
+    </section>
+  );
+};
+
+export default AboutSection;

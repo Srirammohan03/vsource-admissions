@@ -7,6 +7,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+				sans: ['Poppins', 'sans-serif'],
+			},
       colors: {
         brand: {
           red: "#E3000F",

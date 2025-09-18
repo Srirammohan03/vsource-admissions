@@ -6,7 +6,8 @@ import { HeroSlider } from "@/components/HeroSlider";
 import { CounterStrip } from "@/components/CounterStrip";
 import { LightboxGallery } from "@/components/LightboxGallery";
 import { GraduationCap, Handshake, Globe2, Quote } from "lucide-react";
-
+import AboutSection from "@/components/About/Aboutsectioninside";
+import Journey from "@/components/Journey"
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
@@ -18,82 +19,10 @@ export default function Home() {
       {/* HERO */}
       <HeroSlider />
 
-      {/* ABOUT (reference layout) */}
-      <section className="section">
-        <div className="container grid lg:grid-cols-[1.15fr_0.85fr] gap-10 items-start">
-          {/* Left content */}
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-          >
-            <h2 className="h1 text-brand-blue">About Vsource Company</h2>
-            <h3 className="h3 mt-3">South India's Leading Educational Group for Higher Education</h3>
-            <p className="mt-3 text-gray-700">Proudly sending the highest number of students every year.</p>
-            <p className="mt-2 font-semibold">100% Educational Loan Guidance provided to support your academic journey.</p>
 
-            <div className="my-6 h-px bg-gray-200" />
-
-            {/* Inline counters row */}
-            <div className="grid md:grid-cols-3 gap-4">
-              <div className="rounded-2xl border border-brand-blue/40 p-4 flex items-center gap-3">
-                <GraduationCap className="shrink-0" />
-                <div>
-                  <div className="text-2xl font-extrabold text-brand-blue">100000+</div>
-                  <div className="text-gray-700">Students Enrolled</div>
-                </div>
-              </div>
-              <div className="rounded-2xl border border-brand-blue/40 p-4 flex items-center gap-3">
-                <Handshake className="shrink-0" />
-                <div>
-                  <div className="text-2xl font-extrabold text-brand-blue">1500+</div>
-                  <div className="text-gray-700">Educational Programs</div>
-                </div>
-              </div>
-              <div className="rounded-2xl border border-brand-blue/40 p-4 flex items-center gap-3">
-                <Globe2 className="shrink-0" />
-                <div>
-                  <div className="text-2xl font-extrabold text-brand-blue">10+</div>
-                  <div className="text-gray-700">Study Destinations</div>
-                </div>
-              </div>
-            </div>
-
-            <ul className="mt-6 space-y-2 list-disc list-inside text-gray-800">
-              <li>Master’s Programs Abroad</li>
-              <li>B.Tech (CSE, AI/ML, Data Science)</li>
-              <li>MBBS Abroad</li>
-              <li>B.Sc Agriculture</li>
-              <li>Paramedical Studies</li>
-            </ul>
-          </motion.div>
-
-          {/* Right image card with quote */}
-          <motion.div
-            className="rounded-3xl border bg-white shadow-soft overflow-hidden"
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-          >
-            <div className="relative aspect-[4/3] w-full">
-              <Image src="/images/chairman.jpg" alt="Chairman" fill className="object-cover" />
-            </div>
-            <div className="p-5">
-              <div className="flex items-center gap-2 font-semibold text-brand-blue">DURGA KUMAR KAMINENI <span className="text-gray-500 font-normal">— CHAIRMAN</span></div>
-              <div className="mt-2 text-center text-gray-800">
-                <Quote className="inline h-4 w-4 mr-1" />
-                Redefining Education for Tomorrow’s Innovators
-                <Quote className="inline h-4 w-4 ml-1 rotate-180" />
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      <CounterStrip />
-
+      <AboutSection/> 
+      
+      <Journey />
       {/* UNIVERSITIES */}
       <section className="section bg-white">
         <div className="container">
